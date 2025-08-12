@@ -19,7 +19,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['Inter', 'system-ui', 'sans-serif'],
+				poppins: ['Poppins', 'system-ui', 'sans-serif'],
+				sans: ['Poppins', 'system-ui', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -30,7 +31,8 @@ export default {
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))',
-					purple: 'hsl(var(--primary-purple))'
+					purple: 'hsl(var(--primary-purple))',
+					light: 'hsl(var(--primary-light))'
 				},
 				cultural: 'hsl(var(--cultural))',
 				sports: 'hsl(var(--sports))',
@@ -79,6 +81,7 @@ export default {
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-spotlight': 'var(--gradient-spotlight)',
 			},
 			keyframes: {
 				'accordion-down': {
