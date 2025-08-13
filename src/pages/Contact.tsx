@@ -9,6 +9,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
 import Layout from "../components/Layout";
+import GoogleMap from "../components/GoogleMap";
+import SocialMediaButtons from "../components/SocialMediaButtons";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -128,23 +130,23 @@ const Contact = () => {
 
   return (
     <Layout>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Get in Touch</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        <header className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-foreground mb-4">Get in Touch</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Have questions, feedback, or suggestions? We'd love to hear from you. 
             Your input helps us make Campus Connect better for everyone.
           </p>
-        </div>
+        </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <Card>
+            <Card className="glass">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold flex items-center">
-                  <Send className="h-6 w-6 mr-2 text-blue-600" />
+                <CardTitle className="text-2xl font-bold flex items-center text-foreground">
+                  <Send className="h-6 w-6 mr-2 text-primary" />
                   Send us a Message
                 </CardTitle>
               </CardHeader>
@@ -159,9 +161,10 @@ const Contact = () => {
                         placeholder="Your full name"
                         value={formData.name}
                         onChange={(e) => handleInputChange("name", e.target.value)}
-                        className={errors.name ? "border-red-500" : ""}
+                        className={errors.name ? "border-destructive" : ""}
+                        required
                       />
-                      {errors.name && <p className="text-sm text-red-600">{errors.name}</p>}
+                      {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
                     </div>
                     
                     <div className="space-y-2">
@@ -172,9 +175,10 @@ const Contact = () => {
                         placeholder="you@college.edu"
                         value={formData.email}
                         onChange={(e) => handleInputChange("email", e.target.value)}
-                        className={errors.email ? "border-red-500" : ""}
+                        className={errors.email ? "border-destructive" : ""}
+                        required
                       />
-                      {errors.email && <p className="text-sm text-red-600">{errors.email}</p>}
+                      {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                     </div>
                   </div>
                   
@@ -183,8 +187,9 @@ const Contact = () => {
                     <Select 
                       value={formData.subject} 
                       onValueChange={(value) => handleInputChange("subject", value)}
+                      required
                     >
-                      <SelectTrigger className={errors.subject ? "border-red-500" : ""}>
+                      <SelectTrigger className={errors.subject ? "border-destructive" : ""}>
                         <SelectValue placeholder="Select a subject..." />
                       </SelectTrigger>
                       <SelectContent>
@@ -198,7 +203,7 @@ const Contact = () => {
                         ))}
                       </SelectContent>
                     </Select>
-                    {errors.subject && <p className="text-sm text-red-600">{errors.subject}</p>}
+                    {errors.subject && <p className="text-sm text-destructive">{errors.subject}</p>}
                   </div>
                   
                   <div className="space-y-2">
@@ -209,13 +214,15 @@ const Contact = () => {
                       rows={6}
                       value={formData.message}
                       onChange={(e) => handleInputChange("message", e.target.value)}
-                      className={errors.message ? "border-red-500" : ""}
+                      className={errors.message ? "border-destructive" : ""}
+                      maxLength={500}
+                      required
                     />
                     <div className="flex justify-between items-center">
                       {errors.message ? (
-                        <p className="text-sm text-red-600">{errors.message}</p>
+                        <p className="text-sm text-destructive">{errors.message}</p>
                       ) : (
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-muted-foreground">
                           {formData.message.length}/500 characters
                         </p>
                       )}
@@ -248,22 +255,22 @@ const Contact = () => {
           {/* Contact Information & FAQ */}
           <div className="space-y-8">
             {/* Contact Info */}
-            <Card>
+            <Card className="glass">
               <CardHeader>
-                <CardTitle className="text-xl font-bold">Contact Information</CardTitle>
+                <CardTitle className="text-xl font-bold text-foreground">Contact Information</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <div key={index} className="flex items-start space-x-3">
                     <div className="flex-shrink-0">
-                      <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                        <info.icon className="h-5 w-5 text-blue-600" />
+                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                        <info.icon className="h-5 w-5 text-primary" aria-hidden="true" />
                       </div>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">{info.title}</h3>
-                      <p className="text-gray-900">{info.value}</p>
-                      <p className="text-sm text-gray-600">{info.description}</p>
+                      <h3 className="font-semibold text-foreground">{info.title}</h3>
+                      <p className="text-foreground">{info.value}</p>
+                      <p className="text-sm text-muted-foreground">{info.description}</p>
                     </div>
                   </div>
                 ))}
@@ -271,40 +278,30 @@ const Contact = () => {
             </Card>
 
             {/* Social Media */}
-            <Card>
+            <Card className="glass">
               <CardHeader>
-                <CardTitle className="text-xl font-bold">Follow Us</CardTitle>
+                <CardTitle className="text-xl font-bold text-foreground">Follow Us</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-muted-foreground mb-4">
                     Stay connected with us on social media for updates and news.
                   </p>
-                  <div className="flex space-x-4">
-                    <Button variant="outline" size="sm">
-                      LinkedIn
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      Twitter
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      Instagram
-                    </Button>
-                  </div>
+                  <SocialMediaButtons />
                 </div>
               </CardContent>
             </Card>
 
             {/* Quick FAQ */}
-            <Card>
+            <Card className="glass">
               <CardHeader>
-                <CardTitle className="text-xl font-bold">Quick FAQ</CardTitle>
+                <CardTitle className="text-xl font-bold text-foreground">Quick FAQ</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {faqs.slice(0, 3).map((faq, index) => (
-                  <div key={index} className="border-b pb-4 last:border-b-0">
-                    <h4 className="font-medium text-gray-900 mb-2">{faq.question}</h4>
-                    <p className="text-sm text-gray-600">{faq.answer}</p>
+                  <div key={index} className="border-b border-border pb-4 last:border-b-0">
+                    <h4 className="font-medium text-foreground mb-2">{faq.question}</h4>
+                    <p className="text-sm text-muted-foreground">{faq.answer}</p>
                   </div>
                 ))}
                 <Button variant="outline" size="sm" className="w-full mt-4">
@@ -315,23 +312,32 @@ const Contact = () => {
           </div>
         </div>
 
+        {/* Google Map */}
+        <section className="mt-12 mb-8">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-foreground mb-2">Find Us</h2>
+            <p className="text-muted-foreground">Located at IIM Rohtak campus</p>
+          </div>
+          <GoogleMap className="rounded-lg shadow-lg" height="350px" />
+        </section>
+
         {/* Response Time */}
-        <div className="mt-12">
-          <Card className="bg-green-50 border-green-200">
+        <section className="mt-12">
+          <Card className="glass border border-primary/20">
             <CardContent className="p-6">
               <div className="flex items-center justify-center text-center">
-                <CheckCircle className="h-8 w-8 text-green-600 mr-3" />
+                <CheckCircle className="h-8 w-8 text-primary mr-3" aria-hidden="true" />
                 <div>
-                  <h3 className="text-lg font-semibold text-green-900">Quick Response Guarantee</h3>
-                  <p className="text-green-700">
+                  <h3 className="text-lg font-semibold text-foreground">Quick Response Guarantee</h3>
+                  <p className="text-muted-foreground">
                     We typically respond to all inquiries within 24 hours during business days.
                   </p>
                 </div>
               </div>
             </CardContent>
           </Card>
-        </div>
-      </div>
+        </section>
+      </main>
     </Layout>
   );
 };
