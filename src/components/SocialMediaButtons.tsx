@@ -16,20 +16,8 @@ const SocialMediaButtons = ({
     {
       name: "LinkedIn",
       icon: Linkedin,
-      url: "https://linkedin.com/campus-connect",
+      url: "https://www.linkedin.com/in/pratham-goyal-7a970529a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       color: "hover:text-blue-600"
-    },
-    {
-      name: "Facebook", 
-      icon: Facebook,
-      url: "https://facebook.com/campus-connect",
-      color: "hover:text-blue-500"
-    },
-    {
-      name: "Twitter",
-      icon: Twitter,
-      url: "https://twitter.com/campus-connect", 
-      color: "hover:text-sky-500"
     },
     {
       name: "Instagram",

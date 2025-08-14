@@ -131,14 +131,22 @@ const Contact = () => {
   return (
     <Layout>
       <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <header className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-foreground mb-4">Get in Touch</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Have questions, feedback, or suggestions? We'd love to hear from you. 
-            Your input helps us make Campus Connect better for everyone.
-          </p>
-        </header>
+        {/* Hero Image Section */}
+        <section className="relative mb-12 rounded-2xl overflow-hidden">
+          <img 
+            src="/src/assets/contact-hero.jpg" 
+            alt="Professional communication and connectivity concept"
+            className="w-full h-64 sm:h-80 object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-secondary/80 flex items-center justify-center">
+            <div className="text-center text-white">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
+              <p className="text-lg md:text-xl max-w-2xl mx-auto px-4">
+                Have questions, feedback, or suggestions? We'd love to hear from you.
+              </p>
+            </div>
+          </div>
+        </section>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Form */}

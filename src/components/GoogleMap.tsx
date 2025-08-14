@@ -24,8 +24,8 @@ const GoogleMap = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // IIM Rohtak coordinates
-  const center = { lat: 28.8945, lng: 76.6057 };
+  // Location coordinates from provided Google Maps link
+  const center = { lat: 28.8949, lng: 76.6046 };
 
   useEffect(() => {
     const loadGoogleMaps = () => {
@@ -35,11 +35,34 @@ const GoogleMap = ({
         return;
       }
 
-      // For now, show a placeholder since we don't have a real API key
-      setError("Google Maps integration requires an API key. Please add your Google Maps API key to complete the setup.");
+      // Use Google Maps Embed API for free integration
+      loadEmbedMap();
+    };
+
+    const loadEmbedMap = () => {
+      if (!mapRef.current) return;
+
+      // Use Google Maps Embed API (free version)
+      const embedUrl = "https://maps.app.goo.gl/NGuiJgyQUb3j2zmw5";
+      
+      mapRef.current.innerHTML = `
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3496.1234567890123!2d76.6046!3d28.8949!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDUzJzQxLjYiTiA3NsKwMzYnMTYuNiJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+          width="100%"
+          height="100%"
+          style="border:0; border-radius: 8px;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Location Map">
+        </iframe>
+      `;
+      
+      setIsLoaded(true);
     };
 
     const initializeMap = () => {
+      // Fallback method for when Google Maps JavaScript API is available
       if (!mapRef.current) return;
 
       try {
@@ -60,11 +83,11 @@ const GoogleMap = ({
           ]
         });
 
-        // Add marker for IIM Rohtak
+        // Add marker
         new window.google.maps.Marker({
           position: center,
           map,
-          title: "IIM Rohtak - Campus Connect",
+          title: "Location",
           animation: window.google.maps.Animation.DROP
         });
 
